@@ -24,15 +24,15 @@ You have found the easiest way to install & manage WireGuard on any Linux host!
 
 ## Installation
 
-### 1. Install Docker
+### 1. Install Docker and Docker Compose
 
-If you haven't installed Docker yet, install it by running:
+If you haven't installed Docker / Docker Compose yet, install it by running:
 
 ```bash
 $ curl -sSL https://get.docker.com | sh
-$ sudo sh get-docker.sh
 $ sudo usermod -aG docker $(whoami)
-$ bash
+$ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+$ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 ### 2. Configure WireGuard
@@ -57,7 +57,7 @@ Optionally, set a Web UI password by uncommenting `PASSWORD=foobar123` and chang
 Finally, run WireGuard. It will automatically start after a reboot.
 
 ```bash
-$ docker-compose up --detach
+$ docker-compose up -d
 ```
 
 The Web UI will be available on `http://0.0.0.0:51821`. You can create new clients there.
@@ -75,3 +75,4 @@ These options can be configured in `docker-compose.yml` under `environment`.
 | `WG_DEFAULT_DNS` | `1.1.1.1` | `8.8.8.8, 8.8.4.4` | DNS server clients will use |
 
 > If you change `WG_PORT`, make sure to also change the exposed port.
+> Be sure to remove `#Optional:` and any trailing `#` and spaces in `docker-compose.yml`.
